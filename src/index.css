@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  html {
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-image: url("public/assets/bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100vw auto;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  .safe-area-top {
+    padding-top: max(env(safe-area-inset-top), 0.75rem);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 0.75rem);
+  }
+
+  .mobile-touch-target {
+    @apply min-h-12 min-w-12 flex items-center justify-center;
+  }
+
+  .responsive-text-base {
+    @apply text-xs sm:text-sm md:text-base;
+  }
+
+  .responsive-text-lg {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+
+  .responsive-text-xl {
+    @apply text-base sm:text-lg md:text-xl;
+  }
+
+  .responsive-text-2xl {
+    @apply text-lg sm:text-xl md:text-2xl;
+  }
+
+  .responsive-text-3xl {
+    @apply text-xl sm:text-2xl md:text-3xl;
+  }
+
+  .bg-responsive {
+    background-size: auto calc(100vh + 60px);
+  }
+
+  @media (min-width: 850px) {
+    .bg-responsive {
+      background-size: cover;
+    }
+  }
+
+  .flex-mobile {
+    @apply flex flex-col sm:flex-row;
+  }
+
+  .grid-mobile {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Melhorias de touch em dispositivos móveis */
+  button {
+    -webkit-touch-callout: none;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px; /* Evita zoom automático em inputs */
+  }
+
+  /* Melhora a visibilidade do scroll */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+/* Animações suaves */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.3s ease-in-out;
+}

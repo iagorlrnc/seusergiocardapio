@@ -1,0 +1,33 @@
+--- a/src/pages/CustomerOrder.tsx
++++ b/src/pages/CustomerOrder.tsx
+@@ -812,8 +812,17 @@
+                     {} as Record<string, MenuItem[]>,
+                   );
+ 
+-                  return Object.entries(groupedItems).map(
+-                    ([category, items]) => (
++                  // Ordenar categorias de acordo com a ordem salva
++                  const orderedCategoryKeys = categories
++                    .filter((cat) => cat !== "todos" && groupedItems[cat])
++                    .concat(
++                      Object.keys(groupedItems).filter(
++                        (cat) => !categories.includes(cat)
++                      )
++                    );
++
++                  return orderedCategoryKeys.map((category) => {
++                    const items = groupedItems[category];
++                    return (
+                       <div key={category} className="mb-8">
+                         <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">
+                           {category.replace(/\b\w/g, (l) => l.toUpperCase())}
+@@ -852,7 +861,8 @@
+                           ))}
+                         </div>
+                       </div>
+-                    ),
++                    );
++                  }
+                   );
+                 })()}
+               </div>
